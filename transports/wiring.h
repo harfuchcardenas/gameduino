@@ -2,7 +2,7 @@
 #if defined(ESP8266)
 #define CS D8
 #elif  defined(ESP32)
-#define CS 12
+#define CS 5
 #elif defined(ARDUINO_ARCH_STM32)
 #define CS PB0
 #elif (BOARD == BOARD_SUNFLOWER)
@@ -33,16 +33,16 @@ public:
 #endif
 
     cs = _cs;
+    Serial.println("in GDTransport");
+    pinMode(MOSI, OUTPUT);  //setting MOSI to output
+    digitalWrite(MOSI, LOW); 
+    pinMode(SCK, OUTPUT); //setting SCK to output
+    digitalWrite(SCK, LOW);
 
-     pinMode(9, OUTPUT);  
-     digitalWrite(9, HIGH); 
-     pinMode(10, OUTPUT); 
-     digitalWrite(10, HIGH);
-
-    pinMode(cs, OUTPUT);
+    pinMode(cs, OUTPUT); //setting SS to output
     digitalWrite(cs, HIGH);
 
-    SPI.begin();
+    SPI.begin(SCK, MISO, MOSI, CS);
 #if defined(TEENSYDUINO) || defined(ARDUINO_ARCH_STM32L4) || defined(ARDUINO_ARCH_STM32)
     SPI.beginTransaction(SPISettings(1600000, MSBFIRST, SPI_MODE0));
 #else
@@ -188,7 +188,7 @@ public:
   }
 
   void flush() {
-    YIELD();
+    yield();
     getfree(0);
   }
   void coprocsssor_recovery(void) {
@@ -215,7 +215,7 @@ public:
     __end();
     __wr16(REG_CMD_WRITE, wp);
     while (rp() != wp)
-      YIELD();
+      yield();
     stream();
   }
 

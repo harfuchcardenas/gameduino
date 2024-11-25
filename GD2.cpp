@@ -8,6 +8,7 @@
  
 #include <Arduino.h>
 #include "SPI.h"
+#warning "SPI included"
 #if !defined(__SAM3X8E__)
 #include "EEPROM.h"
 #endif
@@ -37,6 +38,7 @@
 byte ft8xx_model;
 
 #if defined(ARDUINO)
+#
 #include "transports/wiring.h"
 #endif
 
@@ -348,7 +350,7 @@ class Bitmap __fromatlas(uint32_t a)
 
 ////////////////////////////////////////////////////////////////////////
 
-static GDTransport GDTR;
+GDTransport GDTR;
 
 GDClass GD;
 

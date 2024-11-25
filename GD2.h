@@ -69,7 +69,7 @@
 #elif (BOARD == BOARD_SUNFLOWER)
 #define DEFAULT_CS 6
 #else
-#define DEFAULT_CS 15
+#define DEFAULT_CS 5
 #endif
 #endif
 
@@ -96,6 +96,8 @@
 class ASPI_t {
 public:
   void begin(void) {
+    System.print("MOSI: ");
+    System.println(MOSI);
     pinMode(MOSI, OUTPUT);
     pinMode(MISO, INPUT);
     pinMode(SCK, OUTPUT);
