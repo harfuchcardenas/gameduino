@@ -2,7 +2,7 @@
 #if defined(ESP8266)
 #define CS D8
 #elif  defined(ESP32)
-#define CS 5
+#define CS 17
 #elif defined(ARDUINO_ARCH_STM32)
 #define CS PB0
 #elif (BOARD == BOARD_SUNFLOWER)
@@ -34,6 +34,14 @@ public:
 
     cs = _cs;
     Serial.println("in GDTransport");
+    Serial.print("MOSI");
+    Serial.println(MOSI);
+    Serial.print("SCK");
+    Serial.println(SCK);
+    Serial.print("MISO");
+    Serial.println(MISO);
+    Serial.print("CS");
+    Serial.println(cs);
     pinMode(MOSI, OUTPUT);  //setting MOSI to output
     digitalWrite(MOSI, LOW); 
     pinMode(SCK, OUTPUT); //setting SCK to output

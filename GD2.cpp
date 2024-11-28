@@ -514,7 +514,7 @@ void GDClass::begin(uint8_t options, int cs, int sdcs) {
   Serial.print("CS: ");
   Serial.println(cs);
 #if defined(ARDUINO) || defined(ESP8266) || defined(ESP32) || defined(SPIDRIVER)
-  Serial.println("Because it is ESP32");
+  Serial.println("In GD2.cpp");
   GDTR.begin0(cs);
   //if (STORAGE && (options & GD_STORAGE)) SD.begin(sdcs);
 #endif
